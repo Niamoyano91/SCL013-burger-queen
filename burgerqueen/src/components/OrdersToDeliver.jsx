@@ -9,7 +9,7 @@ const OrdersToDeliver = () => {
 
     const [arrayOrderDeliver, setArrayOrderDeliver] = useState([])
 
-<<<<<<< HEAD
+
     const getDeliver = () => {
         const db = firebase.firestore()
 
@@ -21,39 +21,7 @@ const OrdersToDeliver = () => {
 
             setArrayOrderDeliver(docs)
         })
-=======
-    const getUpDate = () => {
 
-        const getEntregas = async() =>{
-            const querySnapshot = await firebase.firestore().collection('Entregas').get()
-            const docs = []
-            querySnapshot.forEach(doc => {
-                docs.push({...doc.data(), id:doc.id})
-                console.log(docs)
-            })
-            const docsArray = docs.map(item => (
-                item.order
-            ))
-            console.log(docsArray)
-            setArrayOrderDeliver(docsArray)
-            
-        }
-    getEntregas()
-
-
-        // const querySnapshot = db.collection('Entregas').onSnapshot((querySnapshot) =>{
-        //     const docs = []
-        //     querySnapshot.forEach((doc) => {
-        //         console.log(doc.data())
-        //         console.log(doc.id)
-        //         console.log(arrayOrderDeliver)
-             
-        //     })
-        //     console.log(docs)
-        //     setArrayOrderDeliver(docs)
-        // })
-        
->>>>>>> parent of f832b7d... vista ordenes listas operativa
     }
 
     useEffect(() => {
@@ -80,17 +48,7 @@ const OrdersToDeliver = () => {
     }
 
 
-=======
-    const deleteOrder = (id) => {
-        const db = firebase.firestore()
-        console.log(id)
-        db.collection('Entregas').doc(id).delete().then(() => (
-            console.log("Eliminado")
-        ))   
 
-    }
-
->>>>>>> parent of f832b7d... vista ordenes listas operativa
     return (
         <main className="menuContainerDeliver">
             <section className="buttonsContainer">
