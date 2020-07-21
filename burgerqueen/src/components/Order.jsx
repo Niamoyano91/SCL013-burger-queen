@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react'
+import React, { useContext,useState, useEffect, Fragment } from 'react'
 import { Link } from "react-router-dom";
 import { UserContext } from '../context/UserContext'
 import { firebase } from '../firebase/firebase'
@@ -15,6 +15,18 @@ const Order = () => {
         firebase.firestore().collection('mesas').doc(idTable).update({
             order: arrayMap,
             nameWaiter: name         
+<<<<<<< HEAD
+=======
+        })     
+    }
+
+   /* const getUpate = () => {
+        const db = firebase.firestore()
+        db.collection('mesas').orderBy('fecha', 'desc').onSnapshot((querySnapshot) =>{
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data())
+            setNewArray(doc.data())
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
         })
     }
 

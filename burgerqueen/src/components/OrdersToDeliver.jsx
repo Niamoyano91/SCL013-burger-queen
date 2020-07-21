@@ -8,8 +8,8 @@ import tiket from '../img/tiket.png'
 const OrdersToDeliver = () => {
 
     const [arrayOrderDeliver, setArrayOrderDeliver] = useState([])
-    const [idArrayOrderDeliver, setArrayIdOrderDeliver] = useState('')
 
+<<<<<<< HEAD
     const getDeliver = () => {
         const db = firebase.firestore()
 
@@ -21,12 +21,46 @@ const OrdersToDeliver = () => {
 
             setArrayOrderDeliver(docs)
         })
+=======
+    const getUpDate = () => {
+
+        const getEntregas = async() =>{
+            const querySnapshot = await firebase.firestore().collection('Entregas').get()
+            const docs = []
+            querySnapshot.forEach(doc => {
+                docs.push({...doc.data(), id:doc.id})
+                console.log(docs)
+            })
+            const docsArray = docs.map(item => (
+                item.order
+            ))
+            console.log(docsArray)
+            setArrayOrderDeliver(docsArray)
+            
+        }
+    getEntregas()
+
+
+        // const querySnapshot = db.collection('Entregas').onSnapshot((querySnapshot) =>{
+        //     const docs = []
+        //     querySnapshot.forEach((doc) => {
+        //         console.log(doc.data())
+        //         console.log(doc.id)
+        //         console.log(arrayOrderDeliver)
+             
+        //     })
+        //     console.log(docs)
+        //     setArrayOrderDeliver(docs)
+        // })
+        
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
     }
 
     useEffect(() => {
-        getDeliver()
+        getUpDate()
     }, [])
 
+<<<<<<< HEAD
     const activateArrayOrderDeliver = (item) => {
         setArrayIdOrderDeliver(item.id)
     }
@@ -46,6 +80,17 @@ const OrdersToDeliver = () => {
     }
 
 
+=======
+    const deleteOrder = (id) => {
+        const db = firebase.firestore()
+        console.log(id)
+        db.collection('Entregas').doc(id).delete().then(() => (
+            console.log("Eliminado")
+        ))   
+
+    }
+
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
     return (
         <main className="menuContainerDeliver">
             <section className="buttonsContainer">
@@ -56,22 +101,33 @@ const OrdersToDeliver = () => {
                 </section>
 
                 <section className="containerDeliverOrder">
-                    <Link to="/entregas">
-                        <button className="btnDeliverOrder">Pedidos a entregar</button>
-                    </Link>
+                <Link to="/entregas">
+                    <button className="btnDeliverOrder">Pedidos a entregar</button>
+                </Link>
                 </section>
             </section>
-
             <div className="containerProductsDeliver">
+<<<<<<< HEAD
 
                 {
+=======
+            
+            
+            {
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
                     arrayOrderDeliver.map((item, index) => (
                         <section key={index} className="orderDeliver">
                             <div className="orderTitle">
                                 <div className="containerTittleOrden">
+<<<<<<< HEAD
                                     <div>
                                         <p className="nameTable">{item.id}</p>
                                     </div>
+=======
+                                    <div key={index}>
+                                        <p className="nameTable">{item.name}</p>
+                                    </div>        
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
                                 </div>
 
                                 <div className="containerClientDateAndHour">
@@ -79,7 +135,7 @@ const OrdersToDeliver = () => {
                                         <p className="dateAndHour">Fecha: {item.fecha}</p>
                                         <p className="dateWaiter">Mesero:
                                         {item.nameWaiter}</p>
-                                        <p className="dateClient">Ciente:
+                                        <p className="dateClient">Ciente: 
                                         {item.nameClient}</p>
                                     </div>
                                 </div>
@@ -88,25 +144,33 @@ const OrdersToDeliver = () => {
                             <div className="scrollProduct">
                                 <div className="containerOrderProduct">
                                     <div className="divProduct">
+<<<<<<< HEAD
                                         {item.order.map((ele, a) =>
                                             <p key={a} className="productOrder">{ele}</p>)}
+=======
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
 
+                                            <p className="productOrder">{item.orderProduct}</p>
 
+                                        
                                     </div>
                                 </div>
                             </div>
 
                             <div className="deliverButton">
+<<<<<<< HEAD
                                 <button className="deliverReady" onClick={() => activateArrayOrderDeliver(item)}>Entregado</button>
                                 <button type="submit" key={item.id} className="btnListoDeliver" onClick={() => deleteOrderDelivery()}>
                                     <img className="btnKitchenReady" src={tiket} alt="" />
                                 </button>
+=======
+                                <button  className="deliverReady" onClick={()=> deleteOrder()}>Entregado</button>
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
                             </div>
                         </section>
                     ))
                 }
-            </div>
-
+                </div>
         </main>
     )
 }
