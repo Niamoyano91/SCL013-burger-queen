@@ -1,136 +1,124 @@
 import React, { useState, useEffect } from 'react'
-import { firebase } from '../firebase/firebase'
 import { Link } from "react-router-dom";
-import '../components/componentsCss/OrdersToDeliver.css'
+import { firebase } from '../firebase/firebase'
 import '../components/componentsCss/Kitchen.css'
-import tiket from '../img/tiket.png'
-
-const OrdersToDeliver = () => {
-
-    const [arrayOrderDeliver, setArrayOrderDeliver] = useState([])
 
 
-    const getDeliver = () => {
+const Kitchen = () => {
+    
+    const [newarray, setNewArray] = useState([])
+    const [idOrderDeliver, setIdOrderDeliver] = useState('')
+
+    const getUpate = () => {
         const db = firebase.firestore()
-
-        db.collection('Entregas').orderBy('fecha', 'desc').onSnapshot((querySnapshot) => {
+        db.collection('mesas').orderBy('fecha', 'desc').onSnapshot((querySnapshot) =>{
             const docs = []
             querySnapshot.forEach((doc) => {
-                docs.push({ ...doc.data(), id: doc.id })
+                docs.push({...doc.data(), id:doc.id})
             })
 
-            setArrayOrderDeliver(docs)
+            setNewArray(docs)
         })
-
     }
-
     useEffect(() => {
-        getUpDate()
+        getUpate()
     }, [])
 
-<<<<<<< HEAD
-    const activateArrayOrderDeliver = (item) => {
-        setArrayIdOrderDeliver(item.id)
+    const activateOrderDeliver = (item) => {
+        setIdOrderDeliver(item.id)
     }
 
-    const deleteOrderDelivery = (id) => {
-        let indexOrderDelivery = arrayOrderDeliver.map(item => item.id).indexOf(idArrayOrderDeliver)
-
+    const addOrderDeliver = () => {
+        var indexOrder = newarray.map(item => item.id).indexOf(idOrderDeliver)
         const db = firebase.firestore()
-        db.collection('Entregas').doc(idArrayOrderDeliver).update({
+
+        db.collection('Entregas').doc(idOrderDeliver).update({
+            fecha: newarray[indexOrder].fecha,
+            id: newarray[indexOrder].id,
+            name: newarray[indexOrder].name,
+            nameClient: newarray[indexOrder].nameClient,
+            nameWaiter: newarray[indexOrder].nameWaiter,
+            order: newarray[indexOrder].order
+        })
+
+        db.collection('mesas').doc(idOrderDeliver).update({
             fecha: '',
-            id: '',
-            name: '',
             nameClient: '',
             nameWaiter: '',
-            order: []
+            order: [],
+        })
+    }
+ 
+    const deleteOrder = (id) => {
+        const db = firebase.firestore()
+        db.collection('mesas').doc(id).update({
+            fecha: '',
+            nameClient: '',
+            nameWaiter: '',
+            order: [],
         })
     }
 
-
-
     return (
-        <main className="menuContainerDeliver">
-            <section className="buttonsContainer">
-                <section className="containerNewOrder">
-                    <Link to="/orden">
-                        <button className="btnNewOrder">Nuevo Pedido</button>
-                    </Link>
-                </section>
-
-                <section className="containerDeliverOrder">
-                <Link to="/entregas">
-                    <button className="btnDeliverOrder">Pedidos a entregar</button>
+        <main className="kitcherContainer">
+            <section className="btnKitchenReturn">
+                <Link to="/mesas">
+                    <button className="returnButton">Volver</button>
                 </Link>
-                </section>
             </section>
-            <div className="containerProductsDeliver">
-<<<<<<< HEAD
-
-                {
-=======
-            
-            
             {
->>>>>>> parent of f832b7d... vista ordenes listas operativa
-                    arrayOrderDeliver.map((item, index) => (
-                        <section key={index} className="orderDeliver">
-                            <div className="orderTitle">
-                                <div className="containerTittleOrden">
-<<<<<<< HEAD
-                                    <div>
-                                        <p className="nameTable">{item.id}</p>
-                                    </div>
-=======
-                                    <div key={index}>
-                                        <p className="nameTable">{item.name}</p>
-                                    </div>        
->>>>>>> parent of f832b7d... vista ordenes listas operativa
-                                </div>
-
-                                <div className="containerClientDateAndHour">
-                                    <div>
-                                        <p className="dateAndHour">Fecha: {item.fecha}</p>
-                                        <p className="dateWaiter">Mesero:
-                                        {item.nameWaiter}</p>
-                                        <p className="dateClient">Ciente: 
-                                        {item.nameClient}</p>
-                                    </div>
-                                </div>
+                newarray.map((item, index) => (
+                    <section key={index} className="orderKitchen">
+                        <div className="orderTitle">
+                            <div className="containerTittleOrden">
+                                <div key={index}>
+                                    <p className="nameTable">{item.name}</p>
+                                    <button type="button" 
+                                    className="btnDeleteKitchen" 
+                                    onClick={()=> deleteOrder(item.id)}
+                                    ><img className="imgBtnDeleteKitchen" src="http://imgfz.com/i/GBTyIih.png" alt="" />
+                                    </button>
+                                </div>        
                             </div>
 
-                            <div className="scrollProduct">
-                                <div className="containerOrderProduct">
-                                    <div className="divProduct">
-<<<<<<< HEAD
-                                        {item.order.map((ele, a) =>
-                                            <p key={a} className="productOrder">{ele}</p>)}
-=======
->>>>>>> parent of f832b7d... vista ordenes listas operativa
-
-                                            <p className="productOrder">{item.orderProduct}</p>
-
-                                        
-                                    </div>
+                            <div className="containerClientDateAndHour">
+                                <div key={index}>
+                                    <p className="dateAndHour">Fecha y hora: {item.fecha}</p>
+                                    <p className="dateWaiter">Mesero:
+                                     {item.nameWaiter}</p>
+                                    <p className="dateClient">Ciente: 
+                                    {item.nameClient}</p>
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="deliverButton">
-<<<<<<< HEAD
-                                <button className="deliverReady" onClick={() => activateArrayOrderDeliver(item)}>Entregado</button>
-                                <button type="submit" key={item.id} className="btnListoDeliver" onClick={() => deleteOrderDelivery()}>
-                                    <img className="btnKitchenReady" src={tiket} alt="" />
-                                </button>
-=======
-                                <button  className="deliverReady" onClick={()=> deleteOrder()}>Entregado</button>
->>>>>>> parent of f832b7d... vista ordenes listas operativa
+                        <div className="scrollProduct">
+                            <div className="containerOrderProduct">
+                                <div className="divProduct" key={index}>
+                                    {
+                                    item.order.map((element, index) => 
+                                        <p key={index} className="productOrder">{element}</p>
+                                    )}
+                                    
+                                </div>
                             </div>
-                        </section>
-                    ))
-                }
-                </div>
+                        </div>
+
+                        <div className="kitchenButton">
+                            <button  className="kitchenReady">
+                                <p className="btnList" key={item.id} onClick = {() => activateOrderDeliver(item)}><img className="btnKitchenReady" src="http://imgfz.com/i/OaD2yhx.png" alt=""/></p>
+                            </button>
+                            
+                            <button type="submit" key={item.id} className="btnListo" onClick = {() => addOrderDeliver()}>
+                                Despachar
+                            </button>
+                            
+                        </div>
+                    </section>
+                ))
+            }
         </main>
     )
 }
 
-export default OrdersToDeliver
+export default Kitchen 
