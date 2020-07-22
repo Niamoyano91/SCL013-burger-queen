@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { firebase } from '../firebase/firebase'
 import '../components/componentsCss/Kitchen.css'
-import tiket from '../img/tiket.png'
 
 
 const Kitchen = () => {
@@ -29,25 +28,9 @@ const Kitchen = () => {
         setIdOrderDeliver(item.id)
     }
 
-<<<<<<< HEAD
     const addOrderDeliver = () => {
         var indexOrder = newarray.map(item => item.id).indexOf(idOrderDeliver)
         const db = firebase.firestore()
-=======
- const addOrderDeliver = () => {
-    var indexOrder = newarray.map(item => item.id).indexOf(idOrderDeliver)
-    const db = firebase.firestore()
-    db.collection('Entregas').doc(idOrderDeliver).set({
-      order: newarray[indexOrder]
-    })
-    db.collection('mesas').doc(idOrderDeliver).update({
-        fecha: '',
-        nameClient: '',
-        nameWaiter: '',
-        order: [],
- })
-}
->>>>>>> parent of f832b7d... vista ordenes listas operativa
 
         db.collection('Entregas').doc(idOrderDeliver).update({
             fecha: newarray[indexOrder].fecha,
@@ -123,7 +106,7 @@ const Kitchen = () => {
 
                         <div className="kitchenButton">
                             <button  className="kitchenReady">
-                                <p className="btnList" key={item.id} onClick = {() => activateOrderDeliver(item)}><img className="btnKitchenReady" src={tiket} alt=""/></p>
+                                <p className="btnList" key={item.id} onClick = {() => activateOrderDeliver(item)}><img className="btnKitchenReady" src="http://imgfz.com/i/OaD2yhx.png" alt=""/></p>
                             </button>
                             
                             <button type="submit" key={item.id} className="btnListo" onClick = {() => addOrderDeliver()}>
