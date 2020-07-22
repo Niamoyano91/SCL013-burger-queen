@@ -9,7 +9,12 @@ const Kitchen = () => {
     const [newarray, setNewArray] = useState([])
     const [idOrderDeliver, setIdOrderDeliver] = useState('')
 
+<<<<<<< HEAD
     const getUpate = () => {
+=======
+<<<<<<< HEAD
+    const getDeliver = () => {
+>>>>>>> parent of efd7e06... Revert "archivo fantasma"
         const db = firebase.firestore()
         db.collection('mesas').orderBy('fecha', 'desc').onSnapshot((querySnapshot) =>{
             const docs = []
@@ -19,6 +24,42 @@ const Kitchen = () => {
 
             setNewArray(docs)
         })
+<<<<<<< HEAD
+=======
+=======
+    const getUpDate = () => {
+
+        const getEntregas = async() =>{
+            const querySnapshot = await firebase.firestore().collection('Entregas').get()
+            const docs = []
+            querySnapshot.forEach(doc => {
+                docs.push({...doc.data(), id:doc.id})
+                console.log(docs)
+            })
+            const docsArray = docs.map(item => (
+                item.order
+            ))
+            console.log(docsArray)
+            setArrayOrderDeliver(docsArray)
+            
+        }
+    getEntregas()
+
+
+        // const querySnapshot = db.collection('Entregas').onSnapshot((querySnapshot) =>{
+        //     const docs = []
+        //     querySnapshot.forEach((doc) => {
+        //         console.log(doc.data())
+        //         console.log(doc.id)
+        //         console.log(arrayOrderDeliver)
+             
+        //     })
+        //     console.log(docs)
+        //     setArrayOrderDeliver(docs)
+        // })
+        
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
+>>>>>>> parent of efd7e06... Revert "archivo fantasma"
     }
     useEffect(() => {
         getUpate()
@@ -59,6 +100,21 @@ const Kitchen = () => {
         })
     }
 
+<<<<<<< HEAD
+=======
+
+=======
+    const deleteOrder = (id) => {
+        const db = firebase.firestore()
+        console.log(id)
+        db.collection('Entregas').doc(id).delete().then(() => (
+            console.log("Eliminado")
+        ))   
+
+    }
+
+>>>>>>> parent of f832b7d... vista ordenes listas operativa
+>>>>>>> parent of efd7e06... Revert "archivo fantasma"
     return (
         <main className="kitcherContainer">
             <section className="btnKitchenReturn">
