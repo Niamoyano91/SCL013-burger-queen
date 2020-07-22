@@ -51,7 +51,6 @@
     border: 1px solid #DB2742;
 }
 
-<<<<<<< HEAD
 .btnListoDeliver{
     background: transparent;
     border: 0;
@@ -59,8 +58,6 @@
 }
 
 /*<-----------------------MEDIA QUERY----------------------->*/
-=======
->>>>>>> parent of f832b7d... vista ordenes listas operativa
 @media all and (min-width: 1440px){
     .menuContainerDeliver{
         margin-left: 220px;

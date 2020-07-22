@@ -29,25 +29,9 @@ const Kitchen = () => {
         setIdOrderDeliver(item.id)
     }
 
-<<<<<<< HEAD
     const addOrderDeliver = () => {
         var indexOrder = newarray.map(item => item.id).indexOf(idOrderDeliver)
         const db = firebase.firestore()
-=======
- const addOrderDeliver = () => {
-    var indexOrder = newarray.map(item => item.id).indexOf(idOrderDeliver)
-    const db = firebase.firestore()
-    db.collection('Entregas').doc(idOrderDeliver).set({
-      order: newarray[indexOrder]
-    })
-    db.collection('mesas').doc(idOrderDeliver).update({
-        fecha: '',
-        nameClient: '',
-        nameWaiter: '',
-        order: [],
- })
-}
->>>>>>> parent of f832b7d... vista ordenes listas operativa
 
         db.collection('Entregas').doc(idOrderDeliver).update({
             fecha: newarray[indexOrder].fecha,

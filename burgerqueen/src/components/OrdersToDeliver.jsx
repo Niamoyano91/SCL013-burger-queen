@@ -4,6 +4,7 @@ import { firebase } from '../firebase/firebase'
 import '../components/componentsCss/Kitchen.css'
 
 
+<<<<<<< HEAD
 const Kitchen = () => {
     
     const [newarray, setNewArray] = useState([])
@@ -13,6 +14,11 @@ const Kitchen = () => {
     const getUpate = () => {
 =======
 <<<<<<< HEAD
+=======
+    const [arrayOrderDeliver, setArrayOrderDeliver] = useState([])
+    const [idArrayOrderDeliver, setArrayIdOrderDeliver] = useState('')
+
+>>>>>>> parent of 653252c... arreglo
     const getDeliver = () => {
 >>>>>>> parent of efd7e06... Revert "archivo fantasma"
         const db = firebase.firestore()
@@ -24,6 +30,7 @@ const Kitchen = () => {
 
             setNewArray(docs)
         })
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -60,13 +67,23 @@ const Kitchen = () => {
         
 >>>>>>> parent of f832b7d... vista ordenes listas operativa
 >>>>>>> parent of efd7e06... Revert "archivo fantasma"
+=======
+>>>>>>> parent of 653252c... arreglo
     }
     useEffect(() => {
+<<<<<<< HEAD
         getUpate()
     }, [])
 
     const activateOrderDeliver = (item) => {
         setIdOrderDeliver(item.id)
+=======
+        getDeliver()
+    }, [])
+
+    const activateArrayOrderDeliver = (item) => {
+        setArrayIdOrderDeliver(item.id)
+>>>>>>> parent of 653252c... arreglo
     }
 
     const addOrderDeliver = () => {
@@ -103,6 +120,7 @@ const Kitchen = () => {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 =======
     const deleteOrder = (id) => {
         const db = firebase.firestore()
@@ -173,6 +191,69 @@ const Kitchen = () => {
                     </section>
                 ))
             }
+=======
+    return (
+        <main className="menuContainerDeliver">
+            <section className="buttonsContainer">
+                <section className="containerNewOrder">
+                    <Link to="/orden">
+                        <button className="btnNewOrder">Nuevo Pedido</button>
+                    </Link>
+                </section>
+
+                <section className="containerDeliverOrder">
+                    <Link to="/entregas">
+                        <button className="btnDeliverOrder">Pedidos a entregar</button>
+                    </Link>
+                </section>
+            </section>
+
+            <div className="containerProductsDeliver">
+
+                {
+                    arrayOrderDeliver.map((item, index) => (
+                        <section key={index} className="orderDeliver">
+                            <div className="orderTitle">
+                                <div className="containerTittleOrden">
+                                    <div>
+                                        <p className="nameTable">{item.id}</p>
+                                    </div>
+                                </div>
+
+                                <div className="containerClientDateAndHour">
+                                    <div>
+                                        <p className="dateAndHour">Fecha: {item.fecha}</p>
+                                        <p className="dateWaiter">Mesero:
+                                        {item.nameWaiter}</p>
+                                        <p className="dateClient">Ciente:
+                                        {item.nameClient}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="scrollProduct">
+                                <div className="containerOrderProduct">
+                                    <div className="divProduct">
+                                        {item.order.map((ele, a) =>
+                                            <p key={a} className="productOrder">{ele}</p>)}
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="deliverButton">
+                                <button className="deliverReady" onClick={() => activateArrayOrderDeliver(item)}>Entregado</button>
+                                <button type="submit" key={item.id} className="btnListoDeliver" onClick={() => deleteOrderDelivery()}>
+                                    <img className="btnKitchenReady" src={tiket} alt="" />
+                                </button>
+                            </div>
+                        </section>
+                    ))
+                }
+            </div>
+
+>>>>>>> parent of 653252c... arreglo
         </main>
     )
 }
